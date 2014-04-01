@@ -1,0 +1,733 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     23001,        724]
+NotebookOptionsPosition[     21143,        656]
+NotebookOutlinePosition[     21479,        671]
+CellTagsIndexPosition[     21436,        668]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["2. noisy LIF", "Section"]], "Subtitle",
+ CellChangeTimes->{{3.605270184583192*^9, 3.6052701913545523`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "(a) ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "ISI"], TraditionalForm]],
+  FormatType->"TraditionalForm"]
+}], "Subsection",
+ CellChangeTimes->{{3.6052733215677567`*^9, 3.605273345340625*^9}}],
+
+Cell[TextData[{
+ "I have to use \[OpenCurlyDoubleQuote]cap\[CloseCurlyDoubleQuote] for the \
+capacitance, since ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " reserves C for constants of integration or solution."
+}], "Text",
+ CellChangeTimes->{{3.60527267338025*^9, 3.605272695494896*^9}, {
+  3.605273151757751*^9, 3.6052731551029453`*^9}}],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"dvdt", "=", 
+    FractionBox[
+     RowBox[{
+      SubscriptBox["i", "app"], "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"-", 
+         SubscriptBox["g", "L"]}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"v", "(", "t", ")"}], "-", 
+         SubscriptBox["e", "L"]}], ")"}]}], "+", 
+      SubscriptBox["i", "syn"]}], "cap"]}], ";"}], TraditionalForm]], "Input",\
+
+ CellChangeTimes->{{3.6052721538314667`*^9, 3.605272158716497*^9}, 
+   3.605273030706065*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"soln", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"DSolve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["v", "\[Prime]",
+         MultilineFunction->None], "(", "t", ")"}], "\[LongEqual]", "dvdt"}], 
+      ",", 
+      RowBox[{"v", "(", "t", ")"}], ",", "t"}], "]"}], "]"}]}], 
+  TraditionalForm]], "Input",
+ CellChangeTimes->{{3.605270196766301*^9, 3.6052702735701437`*^9}, {
+   3.6052703263489647`*^9, 3.60527032649662*^9}, {3.605270356787815*^9, 
+   3.605270365794441*^9}, {3.605271240283043*^9, 3.605271245551667*^9}, {
+   3.605271389667738*^9, 3.605271417442152*^9}, 3.6052720523440933`*^9, {
+   3.605272151277046*^9, 3.605272152235486*^9}, 3.6052730307358513`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"v", "[", "t", "]"}], "\[Rule]", 
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"t", " ", 
+         SubscriptBox["g", "L"]}], "cap"]}]], " ", 
+     RowBox[{"C", "[", "1", "]"}]}], "+", 
+    FractionBox[
+     RowBox[{
+      RowBox[{
+       SubscriptBox["e", "L"], " ", 
+       SubscriptBox["g", "L"]}], "+", 
+      SubscriptBox["i", "app"], "+", 
+      SubscriptBox["i", "syn"]}], 
+     SubscriptBox["g", "L"]]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.605270260446273*^9, 3.6052702738395863`*^9}, 
+   3.605270326895804*^9, {3.60527035883531*^9, 3.605270366244731*^9}, 
+   3.6052712469431667`*^9, {3.6052714100955563`*^9, 3.605271417752171*^9}, 
+   3.605272053587881*^9, {3.6052721599904203`*^9, 3.60527216201427*^9}, 
+   3.6052724112557917`*^9, 3.605272860301347*^9, 3.605273030788909*^9, 
+   3.605273568022892*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Find the constant of integration based on ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"v", "[", "0", "]"}], "=", 
+    SubscriptBox["v", "r"]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " (using terminology from 4.2.2):"
+}], "Text",
+ CellChangeTimes->{{3.6052712701282167`*^9, 3.605271289137548*^9}, {
+   3.605271566060624*^9, 3.605271570836096*^9}, 3.605273158302923*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"const", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", "(", "t", ")"}], "/.", "\[VeryThinSpace]", "soln"}], "/.",
+          "\[VeryThinSpace]", 
+         RowBox[{"{", 
+          RowBox[{"t", "\[Rule]", "0"}], "}"}]}], ")"}], "\[LongEqual]", 
+       SubscriptBox["v", "r"]}], ",", 
+      SubscriptBox[
+       TagBox["c",
+        C], "1"]}], "]"}], "]"}]}], TraditionalForm]], "Input",
+ CellChangeTimes->{{3.605271257418343*^9, 3.605271335931698*^9}, {
+   3.60527144018668*^9, 3.605271451322551*^9}, 3.605273030800273*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"C", "[", "1", "]"}], "\[Rule]", 
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["e", "L"]}], " ", 
+      SubscriptBox["g", "L"]}], "-", 
+     SubscriptBox["i", "app"], "-", 
+     SubscriptBox["i", "syn"], "+", 
+     RowBox[{
+      SubscriptBox["g", "L"], " ", 
+      SubscriptBox["v", "r"]}]}], 
+    SubscriptBox["g", "L"]]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.6052712597752047`*^9, {3.605271314529208*^9, 3.605271336265934*^9}, {
+   3.6052714224398937`*^9, 3.605271452246306*^9}, 3.6052720556855173`*^9, 
+   3.605272162114787*^9, 3.605272411367729*^9, 3.605272860376389*^9, 
+   3.6052730308217087`*^9, 3.605273568114224*^9}]
+}, Open  ]],
+
+Cell["Express the result:", "Text",
+ CellChangeTimes->{{3.605271346775584*^9, 3.605271356622357*^9}, 
+   3.60527316093816*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"voft", "=", 
+   RowBox[{"Simplify", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"v", "(", "t", ")"}], "/.", "\[VeryThinSpace]", "soln"}], "/.", 
+     "\[VeryThinSpace]", "const"}], "]"}]}], TraditionalForm]], "Input",
+ CellChangeTimes->{{3.605271363077139*^9, 3.6052713828673267`*^9}, {
+   3.605271585398082*^9, 3.60527160931413*^9}, 3.605273030832697*^9}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{
+    SubscriptBox["e", "L"], " ", 
+    SubscriptBox["g", "L"]}], "+", 
+   SubscriptBox["i", "app"], "+", 
+   SubscriptBox["i", "syn"], "-", 
+   RowBox[{
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{"t", " ", 
+        SubscriptBox["g", "L"]}], "cap"]}]], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["e", "L"], " ", 
+       SubscriptBox["g", "L"]}], "+", 
+      SubscriptBox["i", "app"], "+", 
+      SubscriptBox["i", "syn"], "-", 
+      RowBox[{
+       SubscriptBox["g", "L"], " ", 
+       SubscriptBox["v", "r"]}]}], ")"}]}]}], 
+  SubscriptBox["g", "L"]]], "Output",
+ CellChangeTimes->{{3.605271371182019*^9, 3.605271383161175*^9}, 
+   3.605271425847074*^9, 3.60527145758705*^9, {3.60527158800281*^9, 
+   3.6052716101870403`*^9}, 3.605272057724044*^9, 3.6052721622277*^9, 
+   3.605272411542406*^9, 3.605272860591106*^9, 3.6052730308729057`*^9, 
+   3.605273568286779*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Ignoring ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Tau]", "ref"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " for now, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "ISI"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " will get us from ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["v", "r"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " to ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["v", "th"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ".\n(The assumption and subsequent zeroing for C[1] are only necessary \
+because ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is excessively cautious about letting EVERYTHING be imaginary.)"
+}], "Text",
+ CellChangeTimes->{{3.605271494156701*^9, 3.605271527520234*^9}, {
+   3.605272780877079*^9, 3.605272810185614*^9}, {3.605273179994568*^9, 
+   3.605273183946205*^9}, 3.6052732336457043`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ FormBox[
+  RowBox[{
+   RowBox[{"tsoln", "=", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{"voft", "\[LongEqual]", 
+        SubscriptBox["v", "th"]}], ",", "t"}], "]"}], "]"}]}], ";"}], 
+  TraditionalForm], "\n", 
+ FormBox[
+  RowBox[{"tsoln", "=", 
+   RowBox[{
+    RowBox[{"Assuming", "[", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox[
+        TagBox["c",
+         C], "1"], "\[Element]", 
+       TagBox["Integers",
+        Function[{}, Integers]]}], ",", 
+      RowBox[{"Simplify", "[", "tsoln", "]"}]}], "]"}], "/.", 
+    "\[VeryThinSpace]", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox[
+       TagBox["c",
+        C], "1"], "\[Rule]", "0"}], "}"}]}]}], TraditionalForm]}], "Input",
+ CellChangeTimes->{{3.605271590702363*^9, 3.605271668091262*^9}, {
+   3.6052719511829348`*^9, 3.605271951959551*^9}, {3.605272707296235*^9, 
+   3.6052727768470163`*^9}, 3.605273030885214*^9, {3.605273191137642*^9, 
+   3.6052732137470627`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"t", "\[Rule]", 
+   FractionBox[
+    RowBox[{"cap", " ", 
+     RowBox[{"Log", "[", 
+      FractionBox[
+       RowBox[{
+        RowBox[{
+         SubscriptBox["e", "L"], " ", 
+         SubscriptBox["g", "L"]}], "+", 
+        SubscriptBox["i", "app"], "+", 
+        SubscriptBox["i", "syn"], "-", 
+        RowBox[{
+         SubscriptBox["g", "L"], " ", 
+         SubscriptBox["v", "r"]}]}], 
+       RowBox[{
+        RowBox[{
+         SubscriptBox["e", "L"], " ", 
+         SubscriptBox["g", "L"]}], "+", 
+        SubscriptBox["i", "app"], "+", 
+        SubscriptBox["i", "syn"], "-", 
+        RowBox[{
+         SubscriptBox["g", "L"], " ", 
+         SubscriptBox["v", "th"]}]}]], "]"}]}], 
+    SubscriptBox["g", "L"]]}], "}"}]], "Output",
+ CellChangeTimes->{{3.605272768012167*^9, 3.605272777165057*^9}, 
+   3.605272860694446*^9, 3.605273032653284*^9, {3.6052732012342987`*^9, 
+   3.605273225891911*^9}, 3.605273568432444*^9}]
+}, Open  ]],
+
+Cell["Find the steady state", "Text",
+ CellChangeTimes->{{3.605272245630849*^9, 3.605272257396577*^9}, 
+   3.605272294576673*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"vsssoln", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"Solve", "[", 
+     RowBox[{
+      RowBox[{"dvdt", "\[LongEqual]", "0"}], ",", 
+      RowBox[{"v", "(", "t", ")"}]}], "]"}], "]"}]}], 
+  TraditionalForm]], "Input",
+ CellChangeTimes->{
+  3.605273032843946*^9, {3.605273271900526*^9, 3.605273272376914*^9}, {
+   3.605273551805151*^9, 3.605273554938448*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"v", "[", "t", "]"}], "\[Rule]", 
+   FractionBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["e", "L"], " ", 
+      SubscriptBox["g", "L"]}], "+", 
+     SubscriptBox["i", "app"], "+", 
+     SubscriptBox["i", "syn"]}], 
+    SubscriptBox["g", "L"]]}], "}"}]], "Output",
+ CellChangeTimes->{{3.605272396782996*^9, 3.605272411865966*^9}, 
+   3.6052728607803783`*^9, 3.605272982207103*^9, 3.605273032933937*^9, {
+   3.605273276043592*^9, 3.605273281098454*^9}, 3.6052735685192213`*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "For ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["i", "syn"], "=", "0"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ", this reduces to the form in the text."
+}], "Text",
+ CellChangeTimes->{{3.6052730982878103`*^9, 3.605273146284421*^9}}],
+
+Cell[TextData[{
+ "Rearrange this into something we can subsittute into ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "isi"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ ":"
+}], "Text",
+ CellChangeTimes->{{3.605272469868239*^9, 3.6052724839914083`*^9}, 
+   3.60527330167627*^9}],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{"replacement", "=", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{"Solve", "[", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["v", "ss"], "\[LongEqual]", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"v", "(", "t", ")"}], "/.", "\[VeryThinSpace]", "vsssoln"}],
+          ")"}]}], ",", 
+       SubscriptBox["i", "syn"]}], "]"}], "]"}]}], ";"}], 
+  TraditionalForm]], "Input",
+ CellChangeTimes->{3.605273032971293*^9}],
+
+Cell[TextData[{
+ "Find ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "isi"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " in terms of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["v", "ss"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " (without ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Tau]", "ref"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "):"
+}], "Text",
+ CellChangeTimes->{{3.605272497035439*^9, 3.6052725368447113`*^9}, 
+   3.6052732973345757`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox["T", "ISINoRef"], "=", 
+   RowBox[{"Simplify", "[", 
+    RowBox[{
+     RowBox[{"t", "/.", "\[VeryThinSpace]", "tsoln"}], "/.", 
+     "\[VeryThinSpace]", "replacement"}], "]"}]}], TraditionalForm]], "Input",\
+
+ CellChangeTimes->{{3.605271955585731*^9, 3.605272047918767*^9}, {
+   3.605272081103304*^9, 3.605272107172216*^9}, {3.605272311581081*^9, 
+   3.605272381298151*^9}, {3.605272419136517*^9, 3.605272468332622*^9}, 
+   3.60527254117138*^9, {3.605272628520322*^9, 3.605272633949915*^9}, {
+   3.605272875042804*^9, 3.605272926660993*^9}, 3.605273033014558*^9}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"cap", " ", 
+   RowBox[{"Log", "[", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["v", "r"]}], "+", 
+      SubscriptBox["v", "ss"]}], 
+     RowBox[{
+      SubscriptBox["v", "ss"], "-", 
+      SubscriptBox["v", "th"]}]], "]"}]}], 
+  SubscriptBox["g", "L"]]], "Output",
+ CellChangeTimes->{
+  3.605271958073188*^9, {3.605271995685295*^9, 3.605272018604824*^9}, 
+   3.6052720622678833`*^9, {3.605272101149473*^9, 3.605272107478735*^9}, 
+   3.605272162693828*^9, {3.605272377043969*^9, 3.605272381699218*^9}, {
+   3.6052724119591618`*^9, 3.605272460607229*^9}, 3.6052725419791517`*^9, 
+   3.6052726519153833`*^9, {3.605272860897955*^9, 3.6052729270252733`*^9}, 
+   3.605272977095544*^9, 3.605273033081003*^9, 3.6052735686669083`*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "This version has no refractory period. However, since these dynamics occur \
+only after ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Tau]", "ref"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " has passed, the analysis is piecewise, and we can just add the refractory \
+period: "
+}], "Text",
+ CellChangeTimes->{{3.6052725451967373`*^9, 3.60527261378963*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{
+   SubscriptBox["T", "ISI"], "=", 
+   RowBox[{
+    SubscriptBox["T", "ISINoRef"], "+", 
+    SubscriptBox["\[Tau]", "ref"]}]}], TraditionalForm]], "Input",
+ CellChangeTimes->{{3.605272615496684*^9, 3.6052726457168837`*^9}, {
+   3.6052728878303843`*^9, 3.605272934927374*^9}, 3.60527303311959*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox[
+   RowBox[{"cap", " ", 
+    RowBox[{"Log", "[", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["v", "r"]}], "+", 
+       SubscriptBox["v", "ss"]}], 
+      RowBox[{
+       SubscriptBox["v", "ss"], "-", 
+       SubscriptBox["v", "th"]}]], "]"}]}], 
+   SubscriptBox["g", "L"]], "+", 
+  SubscriptBox["\[Tau]", "ref"]}]], "Output",
+ CellChangeTimes->{{3.605272647076323*^9, 3.605272654819633*^9}, {
+   3.605272860965356*^9, 3.605272935291703*^9}, 3.605272971696052*^9, 
+   3.6052730331753473`*^9, 3.6052735686827*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Plot ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"1", "/", 
+    SubscriptBox["T", "ISI"]}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " vs. ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["I", "app"], TraditionalForm]],
+  FormatType->"TraditionalForm"]
+}], "Subsubsection",
+ CellChangeTimes->{{3.605273370086692*^9, 3.60527338825345*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"params", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["\[Tau]", "ref"], "\[Rule]", "0"}], ",", 
+     RowBox[{"cap", "\[Rule]", "1"}], ",", 
+     RowBox[{
+      SubscriptBox["g", "L"], "\[Rule]", "0.3"}], ",", 
+     RowBox[{
+      SubscriptBox["e", "L"], "\[Rule]", "10.6"}], ",", 
+     RowBox[{
+      SubscriptBox["v", "r"], "\[Rule]", "0"}], ",", 
+     RowBox[{
+      SubscriptBox["v", "th"], "\[Rule]", "30"}], ",", "\[IndentingNewLine]", 
+     
+     RowBox[{
+      SubscriptBox["i", "syn"], "\[Rule]", "0"}]}], 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      SubscriptBox["i", "syn"], " ", "could", " ", "be", " ", "lumped", " ", 
+      "into", " ", 
+      RowBox[{
+       SubscriptBox["i", "app"], " ", "."}]}], "*)"}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"tplot", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"1", "/", 
+      SubscriptBox["T", "ISI"]}], "*", "1000"}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["v", "ss"], "\[Rule]", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"v", "[", "t", "]"}], "/.", "vsssoln"}], ")"}]}], "}"}]}], "/.",
+    "params"}]}]}], "Input",
+ CellChangeTimes->{{3.605273405786849*^9, 3.605273519742518*^9}, {
+  3.605273577046586*^9, 3.605273686110567*^9}, {3.605273717879377*^9, 
+  3.605273718074984*^9}, {3.605273966853395*^9, 3.6052739690297327`*^9}}],
+
+Cell[BoxData[
+ FractionBox["300.`", 
+  RowBox[{"Log", "[", 
+   FractionBox[
+    RowBox[{"3.3333333333333335`", " ", 
+     RowBox[{"(", 
+      RowBox[{"3.1799999999999997`", "\[VeryThinSpace]", "+", 
+       SubscriptBox["i", "app"]}], ")"}]}], 
+    RowBox[{
+     RowBox[{"-", "30"}], "+", 
+     RowBox[{"3.3333333333333335`", " ", 
+      RowBox[{"(", 
+       RowBox[{"3.1799999999999997`", "\[VeryThinSpace]", "+", 
+        SubscriptBox["i", "app"]}], ")"}]}]}]], "]"}]]], "Output",
+ CellChangeTimes->{{3.60527359944456*^9, 3.6052736100803223`*^9}, {
+   3.605273690330892*^9, 3.605273719659088*^9}, 3.6052739873058767`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{"tplot", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["i", "app"], ",", "0", ",", "10"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"AxesLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<\!\(\*SubscriptBox[\(I\), \(app\)]\)  [\[Mu]A/\!\(\*SuperscriptBox[\
+\(cm\), \(2\)]\)]\>\"", ",", 
+      "\"\<FR=1/\!\(\*SubscriptBox[\(T\), \(ISI\)]\)  [Hz]\>\""}], "}"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6052736957584457`*^9, 3.605273711927701*^9}, {
+  3.6052737429879627`*^9, 3.605273788521182*^9}, {3.60527389809741*^9, 
+  3.605273942166395*^9}, {3.605273978989376*^9, 3.6052739832273293`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJwVzXs0lAkABXDH2NpEW3l8g0xjPpVatU2SZXEuk0fM5G1rUBFmIubLsllJ
+L48QjSU03q9sD+RRYRUNJRUVYiunDU3YnmLK2E7W/nHP/ePec34GASL3IGUl
+JSX3+fzfWcxbI7ccCFxL0d70WcMC0nB3rv42Aqui8uIS9WxgXGfSf5BLQPJr
+vMzpMQfZck3fXhcCCvbnrTxPOyiZfxo19iBg/JIWWRxmj9DYwdAkbwIvwhrM
+u90cMNDaODW8k0BE6S+++ZqOAE1yyNKPgI+frxHaHHHB/hAtZw+Bprm3Fc38
+bdBM8U2d3EugVLuNMzG2DXHdVhpcwbyXm3r8QIgTxpeuzDsXQsB+IvGY+Usn
+XM8ZvuBzgMDmHz9pPZM6w+iZdNPVyHnP1NGubC0XvzPKm5dGE8hQW1RYm8pF
+cEXw3VtxBDSSQxa3cnh4OO7gzjxOgG0oYZ2R8GBhvPZpTAKBlri3cuE7Hr6r
+fz3xwykC6kUCVb307WhsoxZJzhLgW1SNetW7gKXinjGdT2Dxc6aW3owLTjmY
+6LgUEwhzKbSq1HeFf4/cSKVy3o9YtalulytUh2Icwxvmd/3frjs8ccWWg+fV
+T18j8N5b/kgyPf9f/ldvTTOBtA4Z++h3bmh0NPWbbCOgVDlSp7XVDcFX3h+I
+7CbAazTf9/IPN9xMD8yLeUVAx/7Q3wsC3RFts/1dIp0OrdqFZgsve6B8KLa+
+Uo+OSbZRn2e7Bx4cvBh9h0HHh4L8zMMDHlhd/S1NdRUdrJ0+uoFfPNCn206k
+sel407FEnG/viQ3TZjaZTnTM9qsN+j32hOycQVZRLB2HO5VJnRdeeBM/rKAd
+peN5yfsVwkkvfAwo2S08QYesxq66WNkbSisNvmen0LFDlbvloaE3dHOYUmkO
+HbyIwiwToTdck1Z+kNXRof7AUb7jtTdaBPpc4wk6NvTtUmPIfkaWkY5Kk5cO
+1BZPLflauxNiSXCnP1MXvTaMuIA6X/Cz/HrUxnQh0iynKfN3Y2ZrhaLohh6m
+k7O/WtL8MSqzjZYmrcB96Z6ldHYASq3Yet3++ij88zafG7IXVQlRywTrGbDO
+urTxTHwgkrz2OtPkDJiaKXRaMoJgOlRyPql7JS6kNGtcrw5G7tq8qm5nJmSM
+z2Eu9QIcaUvLdW5iwtbXuuvqHSF4el4Vdw0N4NPyWquzfx9swjt9liUboP1V
+/fKUeyEoWhFgeF9ugJpEy7mZvlAYtldmb/dhwfiydaLtnf0Qr5eu673BAv/s
+g4LcK2EInlJ51LWOhJv35hMfG8IRUPuRmXyahGDDCC+kRIT9xz2+OGWQ4Cuo
+uMQKEaI8GgbVMklYmbaeLj0vwkl5VLo4m4SY+8jzaa0I1eaKf3MKSGit44U4
+SkVQ3JwbOHeRRNOguIcxKoK4Vy2to5OEdHh2P385BUlZmDCxi0Qwh1cYrEmh
+LLKH43iPxGxcf1uENoWr2uLZez0k2Np5T1J0KQzxNYR9j0nQx5v5zSwKa0Z1
+OCOjJNrCu4q1TShsbIhhlMtIfDi8Z9zAlIJFwjNF0BgJl7dig/VmFLhrCi5P
+/EMi4uSAkPMThYhQJmNyksQWVrGziEMh1vKYom6KxLLWKmaMHYUE9ZH+SDkJ
+lcyEsXgHCrk1ZakzMySOfHPJSeJMofSoiqB5lkR61YKxch6Fi25BtrFfSLQW
+caJqXCg0sG7rW38l0TkolDe5UbgxtVoxN0einhcr6PCg8B8aSEAC
+     "]]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesLabel->{
+    FormBox[
+    "\"\\!\\(\\*SubscriptBox[\\(I\\), \\(app\\)]\\)  \
+[\[Mu]A/\\!\\(\\*SuperscriptBox[\\(cm\\), \\(2\\)]\\)]\"", TraditionalForm], 
+    FormBox[
+    "\"FR=1/\\!\\(\\*SubscriptBox[\\(T\\), \\(ISI\\)]\\)  [Hz]\"", 
+     TraditionalForm]},
+  AxesOrigin->{0, 30.},
+  Method->{},
+  PlotRange->{{0, 10}, {26.07799065637911, 261.23545025402126`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{{3.60527371239711*^9, 3.605273723052227*^9}, 
+   3.605273770678671*^9, 3.6052739435220222`*^9, {3.605273983803825*^9, 
+   3.605273988740725*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1855, 1056},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 131, 1, 56, "Subtitle"],
+Cell[CellGroupData[{
+Cell[735, 27, 217, 7, 45, "Subsection"],
+Cell[955, 36, 348, 8, 31, "Text"],
+Cell[1306, 46, 542, 18, 61, "Input"],
+Cell[CellGroupData[{
+Cell[1873, 68, 737, 17, 33, "Input"],
+Cell[2613, 87, 944, 25, 56, "Output"]
+}, Open  ]],
+Cell[3572, 115, 411, 11, 31, "Text"],
+Cell[CellGroupData[{
+Cell[4008, 130, 677, 19, 33, "Input"],
+Cell[4688, 151, 721, 20, 54, "Output"]
+}, Open  ]],
+Cell[5424, 174, 126, 2, 31, "Text"],
+Cell[CellGroupData[{
+Cell[5575, 180, 394, 9, 33, "Input"],
+Cell[5972, 191, 996, 29, 68, "Output"]
+}, Open  ]],
+Cell[6983, 223, 914, 29, 51, "Text"],
+Cell[CellGroupData[{
+Cell[7922, 256, 998, 31, 57, "Input"],
+Cell[8923, 289, 963, 28, 71, "Output"]
+}, Open  ]],
+Cell[9901, 320, 129, 2, 31, "Text"],
+Cell[CellGroupData[{
+Cell[10055, 326, 396, 11, 33, "Input"],
+Cell[10454, 339, 533, 14, 54, "Output"]
+}, Open  ]],
+Cell[11002, 356, 280, 9, 34, "Text"],
+Cell[11285, 367, 291, 9, 31, "Text"],
+Cell[11579, 378, 479, 15, 35, "Input"],
+Cell[12061, 395, 500, 19, 31, "Text"],
+Cell[CellGroupData[{
+Cell[12586, 418, 614, 13, 33, "Input"],
+Cell[13203, 433, 792, 19, 68, "Output"]
+}, Open  ]],
+Cell[14010, 455, 389, 10, 51, "Text"],
+Cell[CellGroupData[{
+Cell[14424, 469, 330, 8, 33, "Input"],
+Cell[14757, 479, 580, 17, 68, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15374, 501, 361, 13, 39, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[15760, 518, 1421, 41, 100, "Input"],
+Cell[17184, 561, 622, 15, 71, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17843, 581, 675, 16, 60, "Input"],
+Cell[18521, 599, 2570, 51, 186, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
